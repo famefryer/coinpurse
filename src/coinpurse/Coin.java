@@ -2,7 +2,7 @@ package coinpurse;
 //TODO fix this Javadoc. It should be written as a COMPLETE SENTENCE WITH PERIOD.
 /**
  * a coin with a monetary value and currency
- * @author
+ * @author Triwith Mutitakul
  */
 //TODO declare that Coin implements Comparable<Coin>
 public class Coin implements Comparable<Coin>{
@@ -34,7 +34,7 @@ public class Coin implements Comparable<Coin>{
     
 //TODO Write a getValue() method and javadoc.
     public double getValue( ) {
-    	return value;
+    	return this.value;
     } 
 //TODO Write a getCurrency() method and javadoc.
     
@@ -61,10 +61,10 @@ public class Coin implements Comparable<Coin>{
     @Override
 	public int compareTo(Coin c) {
 		if(this.value<c.value){
-			return -1;
+			return 1;
 		}
 		if(this.value>c.value){
-			return 1;
+			return -1;
 		}
 		return 0;
 	}
