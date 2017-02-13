@@ -38,12 +38,6 @@ public class CoinUtil {
 	 * @param coins
 	 *            is a List of Coin objects we want to sort.
 	 *
-	 *            TODO: 1. Write a Comparator<Coin> (you can write the class at
-	 *            the end of this file. Declare it as "class CompareByCurrency"
-	 *            without the "public"). You can also write Comparator as an
-	 *            anonymous class, if you know how. The compare method should
-	 *            order coins by currency. 2. Create a comparator instance and
-	 *            use it to sort the coins.
 	 */
 	public static void sortByCurrency(List<Coin> coins) {
 		ForCompareCurren comp = new ForCompareCurren();
@@ -65,7 +59,7 @@ public class CoinUtil {
 		List<String> tempCur = new ArrayList<>();
 		int count = 0;
 		for (int i = 0; i < coins.size(); i++) {
-			if (i==coins.size()-1){
+			if (i == coins.size() - 1) {
 				tempCur.add(coins.get(i).getCurrency());
 				break;
 			}
@@ -76,18 +70,18 @@ public class CoinUtil {
 		}
 		System.out.println(coins);
 		System.out.println(tempCur);
-		String[] curren = new String[count+1];
+		String[] curren = new String[count + 1];
 		tempCur.toArray(curren);
-		double[] sum = new double[count+1];
-		for(int i = 0;i<curren.length;i++){
-			for(int x = 0;x<coins.size();x++){
-				if(curren[i].equals(coins.get(x).getCurrency())){
-					sum[i]+=coins.get(x).getValue();
+		double[] sum = new double[count + 1];
+		for (int i = 0; i < curren.length; i++) {
+			for (int x = 0; x < coins.size(); x++) {
+				if (curren[i].equals(coins.get(x).getCurrency())) {
+					sum[i] += coins.get(x).getValue();
 				}
 			}
-			System.out.print(sum[i]+" "+curren[i]+" ");
+			System.out.print(sum[i] + " " + curren[i] + " ");
 		}
-		
+
 	}
 
 	/**
@@ -157,8 +151,19 @@ public class CoinUtil {
 
 }
 
+/**
+ * the class that use for sort the coin by currency.
+ * 
+ * @author Triwith Mutitakul
+ *
+ */
 class ForCompareCurren implements Comparator<Coin> {
-
+	/**
+	 * this method that manage how to sort.
+	 * 
+	 * @param coin1
+	 * @param coin2
+	 */
 	@Override
 	public int compare(Coin coin1, Coin coin2) {
 		return coin1.getCurrency().compareToIgnoreCase(coin2.getCurrency());

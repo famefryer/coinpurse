@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-//TODO import ArrayList and Collections (so you can use Collections.sort())
 
 /**
  * A coin purse contains coins. You can insert coins, withdraw money, check the
@@ -15,8 +14,6 @@ import java.util.List;
  */
 public class Purse {
 	/** Collection of objects in the purse. */
-	// TODO declare a List of Coins named "money".
-
 	/**
 	 * Capacity is maximum number of coins the purse can hold. Capacity is set
 	 * when the purse is created and cannot be changed.
@@ -61,7 +58,6 @@ public class Purse {
 	 * 
 	 * @return the capacity
 	 */
-	// TODO write accessor method for capacity. Use Java naming convention.
 	public int getCapacity() {
 		return this.capacity;
 	}
@@ -73,9 +69,6 @@ public class Purse {
 	 * @return true if purse is full.
 	 */
 	public boolean isFull() {
-		// TODO complete this method
-		// TODO Don't Repeat Yourself: Avoid writing duplicate code.
-
 		if (capacity <= money.size()) {
 			return true;
 		}
@@ -91,14 +84,12 @@ public class Purse {
 	 * @return true if coin inserted, false if can't insert
 	 */
 	public boolean insert(Coin coin) {
-		// if the purse is already full then can't insert anything.
-		// TODO complete the insert method
 		if (coin.getValue() == 0) {
 			return false;
 		}
 		if (!isFull()) {
 			money.add(coin);
-			balance += money.get(money.size()-1).getValue();
+			balance += money.get(money.size() - 1).getValue();
 			Collections.sort(this.money);
 			return true;
 		}
@@ -121,7 +112,7 @@ public class Purse {
 		double amount2 = amount;
 		List<Coin> temp = new ArrayList<>();
 		for (Coin coin : money) {
-			if (coin.getValue()<=amount) {
+			if (coin.getValue() <= amount) {
 				amount = amount - coin.getValue();
 				temp.add(coin);
 			}
@@ -134,15 +125,9 @@ public class Purse {
 		}
 		Coin[] myPurse = new Coin[temp.size()];
 		temp.toArray(myPurse);
-		this.balance=this.balance-amount2;
+		this.balance = this.balance - amount2;
 		return myPurse;
 
-		// Success.
-		// Remove the coins you want to withdraw from purse,
-		// and return them as an array.
-		// Use list.toArray( array[] ) to copy a list into an array.
-		// toArray returns a reference to the array itself.
-		// TODO replace this with real code
 	}
 
 	/**
@@ -150,10 +135,7 @@ public class Purse {
 	 * return whatever is a useful description.
 	 */
 	public String toString() {
-		// TODO complete this
 		return money.size() + " coins with value " + this.balance;
 	}
 
 }
-// TODO remove the TODO comments after you complete them.
-// TODO When you are finished, there should not be any TODO. Including this one.
