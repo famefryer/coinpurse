@@ -5,7 +5,7 @@ package coinpurse;
  * 
  * @author Triwith Mutitakul
  */
-public class Coin implements Comparable<Coin> {
+public class Coin implements Comparable<Coin>,Valuable {
 	public static final String DEFAULT_CURRENCY = "Baht";
 	/** Value of the coin. */
 	private final double value;
@@ -31,7 +31,6 @@ public class Coin implements Comparable<Coin> {
 	public Coin(double value, String currency) {
 		this.value = value;
 		this.currency = currency;
-
 	}
 
 	/**
@@ -39,6 +38,7 @@ public class Coin implements Comparable<Coin> {
 	 * 
 	 * @return value of coin.
 	 */
+	@Override
 	public double getValue() {
 		return this.value;
 	}
@@ -48,6 +48,7 @@ public class Coin implements Comparable<Coin> {
 	 * 
 	 * @return currency of coin.
 	 */
+	@Override
 	public String getCurrency() {
 		return currency;
 	}
@@ -60,6 +61,7 @@ public class Coin implements Comparable<Coin> {
 	 *            is the other object that you want to check.
 	 * @return true if it's equal.
 	 */
+	@Override
 	public boolean equals(Object arg) {
 		if (arg == null) {
 			return false;
@@ -93,13 +95,15 @@ public class Coin implements Comparable<Coin> {
 		return 0;
 	}
 
-	@Override
+	
 	/**
 	 * show the value and currency of this coin.
 	 * 
 	 * @return the String that contain the value and currency of coin.
 	 */
+	@Override
 	public String toString() {
 		return this.value + "-" + this.currency;
 	}
+
 }

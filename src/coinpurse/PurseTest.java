@@ -102,10 +102,10 @@ public class PurseTest {
 		Purse purse = new Purse(10);
 		int [] values = {1, 10, 1000};
 		for(int value : values) {
-			Coin coin = new Coin(value);
+			Valuable coin = new Coin(value);
 			assertTrue(purse.insert(coin));
 			assertEquals(value,  purse.getBalance(), TOL);
-			Coin [] result = purse.withdraw(value);
+			Valuable [] result = purse.withdraw(value);
 			assertTrue( result != null );
 			assertEquals( 1, result.length );
 			assertSame(  coin, result[0] );

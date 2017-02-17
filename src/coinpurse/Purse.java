@@ -3,6 +3,7 @@ package coinpurse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class Purse {
 	 */
 	private final int capacity;
 	private double balance = 0;
-	private List<Coin> money = new ArrayList<Coin>();
+	public List<Valuable> money = new ArrayList<Valuable>();
 
 	/**
 	 * Create a purse with a specified capacity.
@@ -79,18 +80,29 @@ public class Purse {
 	 * Insert a coin into the purse. The coin is only inserted if the purse has
 	 * space for it and the coin has positive value. No worthless coins!
 	 * 
-	 * @param coin
+	 * @param valuable
 	 *            is a Coin object to insert into purse
 	 * @return true if coin inserted, false if can't insert
 	 */
-	public boolean insert(Coin coin) {
-		if (coin.getValue() == 0) {
+	public boolean insert(Valuable valuable) {
+		if (valuable.getValue() == 0) {
 			return false;
 		}
 		if (!isFull()) {
-			money.add(coin);
+			money.add(valuable);
 			balance += money.get(money.size() - 1).getValue();
-			Collections.sort(this.money);
+			Collections.sort(this.money, new Comparator<Valuable>() {
+				@Override
+				public int compare(Valuable arg0, Valuable arg1) {
+					if (arg0.getValue() < arg1.getValue()) {
+						return 1;
+					}
+					if (arg0.getValue() > arg1.getValue()) {
+						return -1;
+					}
+					return 0;
+				}
+			});
 			return true;
 		}
 		return false;
@@ -107,23 +119,23 @@ public class Purse {
 	 *         withdraw requested amount.
 	 */
 
-	public Coin[] withdraw(double amount) {
+	public Valuable[] withdraw(double amount) {
 		// TODO don't allow to withdraw amount < 0
 		double amount2 = amount;
-		List<Coin> temp = new ArrayList<>();
-		for (Coin coin : money) {
-			if (coin.getValue() <= amount) {
-				amount = amount - coin.getValue();
-				temp.add(coin);
+		List<Valuable> temp = new ArrayList<>();
+		for (Valuable valuable : money) {
+			if (valuable.getValue() <= amount) {
+				amount = amount - valuable.getValue();
+				temp.add(valuable);
 			}
 		}
 		if (amount != 0) {
 			return null;
 		}
-		for (Coin coin : temp) {
-			money.remove(coin);
+		for (Valuable valuable : temp) {
+			money.remove(valuable);
 		}
-		Coin[] myPurse = new Coin[temp.size()];
+		Valuable[] myPurse = new Valuable[temp.size()];
 		temp.toArray(myPurse);
 		this.balance = this.balance - amount2;
 		return myPurse;
