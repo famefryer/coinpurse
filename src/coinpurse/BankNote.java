@@ -8,14 +8,14 @@ public class BankNote implements Valuable {
 
 	public BankNote(double value) {
 		this.value = value;
-		this.serialNumber=BankNote.nextSerialNumber;
+		this.serialNumber = BankNote.nextSerialNumber;
 		BankNote.nextSerialNumber++;
 	}
 
 	public BankNote(double value, String currency) {
-		this.value=value;
-		this.currency=currency;
-		this.serialNumber=BankNote.nextSerialNumber;
+		this.value = value;
+		this.currency = currency;
+		this.serialNumber = BankNote.nextSerialNumber;
 		BankNote.nextSerialNumber++;
 
 	}

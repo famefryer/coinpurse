@@ -70,14 +70,13 @@ public class ConsoleDialog {
 				boolean ok = purse.insert(bank);
 				System.out.println((ok ? "ok" : "FAILED"));
 
-			} 
-			else{
+			} else {
 				Coin coin = new Coin(value);
 				System.out.printf("Deposit %s... ", coin.toString());
 				boolean ok = purse.insert(coin);
 				System.out.println((ok ? "ok" : "FAILED"));
 			}
-			
+
 		}
 		if (scanline.hasNext()) {
 			System.out.println("Invalid input: " + scanline.next());

@@ -5,7 +5,7 @@ package coinpurse;
  * 
  * @author Triwith Mutitakul
  */
-public class Coin implements Comparable<Coin>,Valuable {
+public class Coin implements Comparable<Coin>, Valuable {
 	public static final String DEFAULT_CURRENCY = "Baht";
 	/** Value of the coin. */
 	private final double value;
@@ -95,7 +95,6 @@ public class Coin implements Comparable<Coin>,Valuable {
 		return 0;
 	}
 
-	
 	/**
 	 * show the value and currency of this coin.
 	 * 
