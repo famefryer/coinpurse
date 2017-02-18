@@ -16,8 +16,8 @@ import java.util.List;
 public class Purse {
 	/** Collection of objects in the purse. */
 	/**
-	 * Capacity is maximum number of coins the purse can hold. Capacity is set
-	 * when the purse is created and cannot be changed.
+	 * Capacity is maximum number of money that the purse can hold. Capacity is
+	 * set when the purse is created and cannot be changed.
 	 */
 	private final int capacity;
 	private double balance = 0;
@@ -27,7 +27,7 @@ public class Purse {
 	 * Create a purse with a specified capacity.
 	 * 
 	 * @param capacity
-	 *            is maximum number of coins you can put in purse.
+	 *            is maximum number of money you can put in purse.
 	 */
 	public Purse(int capacity) {
 		this.capacity = capacity;
@@ -39,7 +39,7 @@ public class Purse {
 	 * Count and return the number of coins in the purse. This is the number of
 	 * coins, not their value.
 	 * 
-	 * @return the number of coins in the purse
+	 * @return the number of Valuable object in the purse.
 	 */
 	public int count() {
 		return money.size();
@@ -77,11 +77,11 @@ public class Purse {
 	}
 
 	/**
-	 * Insert a coin into the purse. The coin is only inserted if the purse has
-	 * space for it and the coin has positive value. No worthless coins!
+	 * Insert a money into the purse. The money is only inserted if the purse
+	 * has space for it and the coin has positive value. No worthless coins!
 	 * 
 	 * @param valuable
-	 *            is a Coin object to insert into purse
+	 *            is a Valuable object to insert into purse
 	 * @return true if coin inserted, false if can't insert
 	 */
 	public boolean insert(Valuable valuable) {
@@ -109,7 +109,7 @@ public class Purse {
 	}
 
 	/**
-	 * Withdraw the requested amount of money. Return an array of Coins
+	 * Withdraw the requested amount of money. Return an array of Valuable.
 	 * withdrawn from purse, or return null if cannot withdraw the amount
 	 * requested.
 	 * 
@@ -147,7 +147,7 @@ public class Purse {
 	 * return whatever is a useful description.
 	 */
 	public String toString() {
-		return money.size() + " coins with value " + this.balance;
+		return money.size() + " Valuable object with value " + this.balance;
 	}
 
 }
