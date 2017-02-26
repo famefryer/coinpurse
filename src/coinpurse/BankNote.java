@@ -17,7 +17,6 @@ public class BankNote extends AbstractValuable {
 	 */
 	public BankNote(double value) {
 		super(value);
-		this.currency="Baht";
 		this.serialNumber = BankNote.nextSerialNumber;
 		BankNote.nextSerialNumber++;
 	}
@@ -29,63 +28,30 @@ public class BankNote extends AbstractValuable {
 	 * @param currency
 	 */
 	public BankNote(double value, String currency) {
-		super(value,currency);
+		super(value, currency);
 		this.serialNumber = BankNote.nextSerialNumber;
 		BankNote.nextSerialNumber++;
-
-	}
-	@Override
-	public void setCurrency(String currency){
-		this.currency=currency;
-	}
-	
-	@Override
-	public void setValue(double value){
-		this.value=value;
 	}
 
 	/**
-	 * a method that use for called the value of banknote.
+	 * /** a method that use for set the currency.
 	 * 
-	 * @return value of banknote.
+	 * @param currency
 	 */
-//	@Override
-//	public double getValue() {
-//		return this.value;
-//	}
-//
-//	/**
-//	 * a method that use for called the currency of banknote.
-//	 * 
-//	 * @return value of banknote.
-//	 */
-//	@Override
-//	public String getCurrency() {
-//		return this.currency;
-//	}
+	@Override
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
 
 	/**
-	 * this method use for check between two banknote by the same value and same
-	 * currency.
+	 * a method that use for set the value.
 	 * 
-	 * @param obj
-	 *            is the other object that you want to check.
-	 * @return true if it's equal.
+	 * @param value
 	 */
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (obj == null) {
-//			return false;
-//		}
-//		if (obj.getClass() != this.getClass()) {
-//			return false;
-//		}
-//		BankNote other = (BankNote) obj;
-//		if (this.currency != other.currency || this.value != other.value) {
-//			return false;
-//		}
-//		return true;
-//	}
+	@Override
+	public void setValueCoin(double value) {
+		this.value = value;
+	}
 
 	/**
 	 * a method that use for called the serial number of banknote.
@@ -102,7 +68,7 @@ public class BankNote extends AbstractValuable {
 	 * @return the String that contain the value and currency of banknote.
 	 */
 	public String toString() {
-		return this.value + "-" + this.currency + " note [" + this.serialNumber+"]";
+		return this.value + "-" + this.currency + " note [" + this.serialNumber + "]";
 	}
 
 }

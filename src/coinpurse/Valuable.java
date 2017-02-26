@@ -8,7 +8,7 @@ import java.util.Comparator;
  * @author Triwith Mutitakul
  *
  */
-public interface Valuable extends Comparable<Valuable>{
+public interface Valuable extends Comparable<Valuable> {
 	/**
 	 * Get the monetary value of this object, in its own currency.
 	 * 
@@ -22,7 +22,10 @@ public interface Valuable extends Comparable<Valuable>{
 	 * @return the currency of this object
 	 */
 	public String getCurrency();
+
 	public void setCurrency(String currency);
-	public void setValue(double value);
+
+	public void setValueCoin(double d);
+
 
 }

@@ -25,7 +25,7 @@ public class Main {
 		} catch (Exception e) {
 			System.out.println("Error!!!");
 			e.printStackTrace();
-		} 
+		}
 		Purse p = new Purse(12);
 		ConsoleDialog c = new ConsoleDialog(p);
 		c.run();

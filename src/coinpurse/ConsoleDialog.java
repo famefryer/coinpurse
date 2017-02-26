@@ -9,11 +9,11 @@ import java.util.Scanner;
  */
 public class ConsoleDialog {
 	// default currency for this dialog
-	public static final String CURRENCY = "Baht";
+	public String CURRENCY;
 	// use a single java.util.Scanner object for reading all input
 	private static Scanner console = new Scanner(System.in);
 	private MoneyFactory factory = MoneyFactory.getInstance();
-
+	private Valuable valuable;
 	// TODO How does this object get a Purse? DO NOT WRITE "new Purse(xx)".
 	private Purse purse;
 
@@ -32,7 +32,6 @@ public class ConsoleDialog {
 	public void run() {
 		String choice = "";
 		while (true) {
-			System.out.printf("Purse contains %.2f %s\n", purse.getBalance(), CURRENCY);
 			if (purse.isFull())
 				System.out.println("Purse is FULL.");
 			// print a list of choices
@@ -49,6 +48,7 @@ public class ConsoleDialog {
 				break; // leave the loop
 			else
 				System.out.println("\"" + choice + "\" is not a valid choice.");
+			System.out.printf("Purse contains %.2f %s\n", purse.getBalance(), valuable.getCurrency());
 		}
 		// confirm that we are quitting
 		System.out.println("Goodbye. The purse still has " + purse.getBalance() + " " + CURRENCY);
@@ -64,12 +64,11 @@ public class ConsoleDialog {
 		// parse input line into numbers
 		Scanner scanline = new Scanner(inline);
 		while (scanline.hasNext()) {
-			Valuable valuable;
 			String value = scanline.next();
-			try{
+			try {
 				valuable = factory.createMoney(value);
-			}catch(IllegalArgumentException ex){
-				System.out.println("Sorry, "+value+" is not valid amount.");
+			} catch (IllegalArgumentException ex) {
+				System.out.println("Sorry, " + value + " is not valid amount.");
 				continue;
 			}
 			System.out.printf("Deposit %s... ", valuable.toString());
@@ -77,9 +76,7 @@ public class ConsoleDialog {
 			System.out.println((ok ? "ok" : "FAILED"));
 
 		}
-//		if (scanline.hasNext()) {
-//			System.out.println("Invalid input: " + scanline.next());
-//		}
+
 	}
 
 	/**
@@ -96,7 +93,7 @@ public class ConsoleDialog {
 			else {
 				System.out.print("You withdrew:");
 				for (int k = 0; k < coins.length; k++) {
-					System.out.print(" " + coins[k].toString());
+					System.out.print(" " + coins[k].toString() + " , ");
 				}
 				System.out.println();
 			}
