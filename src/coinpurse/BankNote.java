@@ -6,10 +6,8 @@ package coinpurse;
  * @author Triwith Mutitakul
  *
  */
-public class BankNote implements Valuable {
+public class BankNote extends AbstractValuable {
 	private static long nextSerialNumber = 1000000;
-	private double value;
-	private String currency = "Baht";
 	private long serialNumber;
 
 	/**
@@ -18,7 +16,8 @@ public class BankNote implements Valuable {
 	 * @param value
 	 */
 	public BankNote(double value) {
-		this.value = value;
+		super(value);
+		this.currency="Baht";
 		this.serialNumber = BankNote.nextSerialNumber;
 		BankNote.nextSerialNumber++;
 	}
@@ -30,11 +29,19 @@ public class BankNote implements Valuable {
 	 * @param currency
 	 */
 	public BankNote(double value, String currency) {
-		this.value = value;
-		this.currency = currency;
+		super(value,currency);
 		this.serialNumber = BankNote.nextSerialNumber;
 		BankNote.nextSerialNumber++;
 
+	}
+	@Override
+	public void setCurrency(String currency){
+		this.currency=currency;
+	}
+	
+	@Override
+	public void setValue(double value){
+		this.value=value;
 	}
 
 	/**
@@ -42,20 +49,20 @@ public class BankNote implements Valuable {
 	 * 
 	 * @return value of banknote.
 	 */
-	@Override
-	public double getValue() {
-		return this.value;
-	}
-
-	/**
-	 * a method that use for called the currency of banknote.
-	 * 
-	 * @return value of banknote.
-	 */
-	@Override
-	public String getCurrency() {
-		return this.currency;
-	}
+//	@Override
+//	public double getValue() {
+//		return this.value;
+//	}
+//
+//	/**
+//	 * a method that use for called the currency of banknote.
+//	 * 
+//	 * @return value of banknote.
+//	 */
+//	@Override
+//	public String getCurrency() {
+//		return this.currency;
+//	}
 
 	/**
 	 * this method use for check between two banknote by the same value and same
@@ -65,20 +72,20 @@ public class BankNote implements Valuable {
 	 *            is the other object that you want to check.
 	 * @return true if it's equal.
 	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj.getClass() != this.getClass()) {
-			return false;
-		}
-		BankNote other = (BankNote) obj;
-		if (this.currency != other.currency || this.value != other.value) {
-			return false;
-		}
-		return true;
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (obj == null) {
+//			return false;
+//		}
+//		if (obj.getClass() != this.getClass()) {
+//			return false;
+//		}
+//		BankNote other = (BankNote) obj;
+//		if (this.currency != other.currency || this.value != other.value) {
+//			return false;
+//		}
+//		return true;
+//	}
 
 	/**
 	 * a method that use for called the serial number of banknote.
@@ -95,7 +102,7 @@ public class BankNote implements Valuable {
 	 * @return the String that contain the value and currency of banknote.
 	 */
 	public String toString() {
-		return this.value + "-" + this.currency + " note " + this.serialNumber;
+		return this.value + "-" + this.currency + " note [" + this.serialNumber+"]";
 	}
 
 }

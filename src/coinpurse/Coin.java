@@ -5,12 +5,8 @@ package coinpurse;
  * 
  * @author Triwith Mutitakul
  */
-public class Coin implements Comparable<Coin>, Valuable {
+public class Coin extends AbstractValuable {
 	public static final String DEFAULT_CURRENCY = "Baht";
-	/** Value of the coin. */
-	private final double value;
-	/** The currency, of course. */
-	private final String currency;
 
 	/**
 	 * A coin with given value using the default currency.
@@ -18,8 +14,8 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 * @param value
 	 */
 	public Coin(double value) {
-		this.value = value;
-		this.currency = this.DEFAULT_CURRENCY;
+		super(value);
+		this.currency="Baht";
 	}
 
 	/**
@@ -29,8 +25,7 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 * @param currency
 	 */
 	public Coin(double value, String currency) {
-		this.value = value;
-		this.currency = currency;
+		super(value, currency);
 	}
 
 	/**
@@ -41,6 +36,16 @@ public class Coin implements Comparable<Coin>, Valuable {
 	@Override
 	public double getValue() {
 		return this.value;
+	}
+	
+	@Override
+	public void setCurrency(String currency){
+		this.currency=currency;
+	}
+	
+	@Override
+	public void setValue(double value){
+		this.value=value;
 	}
 
 	/**
@@ -61,20 +66,20 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 *            is the other object that you want to check.
 	 * @return true if it's equal.
 	 */
-	@Override
-	public boolean equals(Object arg) {
-		if (arg == null) {
-			return false;
-		}
-		if (arg.getClass() != this.getClass()) {
-			return false;
-		}
-		Coin other = (Coin) arg;
-		if (this.currency != other.currency || this.value != other.value) {
-			return false;
-		}
-		return true;
-	}
+	// @Override
+	// public boolean equals(Object arg) {
+	// if (arg == null) {
+	// return false;
+	// }
+	// if (arg.getClass() != this.getClass()) {
+	// return false;
+	// }
+	// Coin other = (Coin) arg;
+	// if (this.currency != other.currency || this.value != other.value) {
+	// return false;
+	// }
+	// return true;
+	// }
 
 	/**
 	 * this method use for compare the coin.
@@ -84,16 +89,16 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 * @return if it's has value more than c return -1,if its less than c return
 	 *         1,if its equals return 0
 	 */
-	@Override
-	public int compareTo(Coin c) {
-		if (this.value < c.value) {
-			return 1;
-		}
-		if (this.value > c.value) {
-			return -1;
-		}
-		return 0;
-	}
+	// @Override
+	// public int compareTo(Coin c) {
+	// if (this.value < c.value) {
+	// return 1;
+	// }
+	// if (this.value > c.value) {
+	// return -1;
+	// }
+	// return 0;
+	// }
 
 	/**
 	 * show the value and currency of this coin.
@@ -102,7 +107,7 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 */
 	@Override
 	public String toString() {
-		return this.value + "-" + this.currency;
+		return this.value + "-" + this.currency+" coin";
 	}
 
 }

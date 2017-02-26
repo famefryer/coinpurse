@@ -12,6 +12,7 @@ public class ConsoleDialog {
 	public static final String CURRENCY = "Baht";
 	// use a single java.util.Scanner object for reading all input
 	private static Scanner console = new Scanner(System.in);
+	private MoneyFactory factory = MoneyFactory.getInstance();
 
 	// TODO How does this object get a Purse? DO NOT WRITE "new Purse(xx)".
 	private Purse purse;
@@ -62,26 +63,23 @@ public class ConsoleDialog {
 		String inline = console.nextLine();
 		// parse input line into numbers
 		Scanner scanline = new Scanner(inline);
-		while (scanline.hasNextDouble()) {
-			double value = scanline.nextDouble();
-			if (value >= 20) {
-				BankNote bank = new BankNote(value);
-				System.out.printf("Deposit %s... ", bank.toString());
-				boolean ok = purse.insert(bank);
-				System.out.println((ok ? "ok" : "FAILED"));
-
-			} else {
-				Coin coin = new Coin(value);
-				System.out.printf("Deposit %s... ", coin.toString());
-				boolean ok = purse.insert(coin);
-				System.out.println((ok ? "ok" : "FAILED"));
+		while (scanline.hasNext()) {
+			Valuable valuable;
+			String value = scanline.next();
+			try{
+				valuable = factory.createMoney(value);
+			}catch(IllegalArgumentException ex){
+				System.out.println("Sorry, "+value+" is not valid amount.");
+				continue;
 			}
+			System.out.printf("Deposit %s... ", valuable.toString());
+			boolean ok = purse.insert(valuable);
+			System.out.println((ok ? "ok" : "FAILED"));
 
 		}
-		if (scanline.hasNext()) {
-			System.out.println("Invalid input: " + scanline.next());
-		}
-
+//		if (scanline.hasNext()) {
+//			System.out.println("Invalid input: " + scanline.next());
+//		}
 	}
 
 	/**
