@@ -5,6 +5,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Observable;
+
+import coinpurse.strategy.GreedyWithdraw;
+import coinpurse.strategy.RecursiveWithdraw;
+import coinpurse.strategy.WithdrawStrategy;
 
 /**
  * A coin purse contains coins. You can insert coins, withdraw money, check the
@@ -13,7 +18,7 @@ import java.util.List;
  * 
  * @author Triwith Mutitakul
  */
-public class Purse {
+public class Purse extends Observable{
 	/** Collection of objects in the purse. */
 	/**
 	 * Capacity is maximum number of money that the purse can hold. Capacity is
@@ -22,6 +27,7 @@ public class Purse {
 	private final int capacity;
 	private double balance = 0;
 	public List<Valuable> money = new ArrayList<Valuable>();
+	private WithdrawStrategy strategy;
 
 	/**
 	 * Create a purse with a specified capacity.
@@ -31,6 +37,7 @@ public class Purse {
 	 */
 	public Purse(int capacity) {
 		this.capacity = capacity;
+		strategy = new RecursiveWithdraw();
 		// TODO initialize the attributes of purse
 
 	}
@@ -91,6 +98,8 @@ public class Purse {
 		if (!isFull()) {
 			money.add(valuable);
 			balance += money.get(money.size() - 1).getValue();
+			setChanged();
+			notifyObservers();
 			Collections.sort(this.money, new Comparator<Valuable>() {
 				@Override
 				public int compare(Valuable arg0, Valuable arg1) {
@@ -120,26 +129,25 @@ public class Purse {
 	 */
 
 	public Valuable[] withdraw(double amount) {
-		// TODO don't allow to withdraw amount < 0
-		double amount2 = amount;
-		List<Valuable> temp = new ArrayList<>();
-		for (Valuable valuable : money) {
-			if (valuable.getValue() <= amount) {
-				amount = amount - valuable.getValue();
-				temp.add(valuable);
+		List<Valuable> list = strategy.withdraw(amount, money);
+		if(list!=null){
+			Valuable[] val = new Valuable[list.size()];
+			list.toArray(val);
+			if(val!=null){
+				this.balance = this.balance - amount;
 			}
+			for (Valuable valuable : val) {
+				money.remove(valuable);
+			}
+			setChanged();
+			notifyObservers();
+			return val;
 		}
-		if (amount != 0) {
-			return null;
-		}
-		for (Valuable valuable : temp) {
-			money.remove(valuable);
-		}
-		Valuable[] myPurse = new Valuable[temp.size()];
-		temp.toArray(myPurse);
-		this.balance = this.balance - amount2;
-		return myPurse;
-
+		else return null;
+	}
+	
+	public void setWithdrawStrategy(WithdrawStrategy wstrategy){
+		
 	}
 
 	/**

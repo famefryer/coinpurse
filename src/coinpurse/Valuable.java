@@ -27,5 +27,4 @@ public interface Valuable extends Comparable<Valuable> {
 
 	public void setValueCoin(double d);
 
-
 }

@@ -9,8 +9,7 @@ import java.util.Scanner;
  */
 public class ConsoleDialog {
 	// default currency for this dialog
-	public String CURRENCY;
-	// use a single java.util.Scanner object for reading all input
+	public static final String CURRENCY = "Baht";	// use a single java.util.Scanner object for reading all input
 	private static Scanner console = new Scanner(System.in);
 	private MoneyFactory factory = MoneyFactory.getInstance();
 	private Valuable valuable;
@@ -48,7 +47,7 @@ public class ConsoleDialog {
 				break; // leave the loop
 			else
 				System.out.println("\"" + choice + "\" is not a valid choice.");
-			System.out.printf("Purse contains %.2f %s\n", purse.getBalance(), valuable.getCurrency());
+			System.out.printf("Purse contains %.2f %s\n", purse.getBalance(), CURRENCY);
 		}
 		// confirm that we are quitting
 		System.out.println("Goodbye. The purse still has " + purse.getBalance() + " " + CURRENCY);

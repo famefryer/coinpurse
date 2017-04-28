@@ -23,7 +23,7 @@ public class MalayMoneyFactory extends MoneyFactory {
 					valuable.setCurrency("Sen");
 				}
 			} else {
-				valuable = new BankNote(value); 
+				valuable = new BankNote(value);
 				valuable.setCurrency("Ringgit");
 			}
 			return valuable;
