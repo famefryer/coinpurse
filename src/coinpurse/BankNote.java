@@ -9,6 +9,7 @@ package coinpurse;
 public class BankNote extends AbstractValuable {
 	private static long nextSerialNumber = 1000000;
 	private long serialNumber;
+	
 
 	/**
 	 * A banknote with given value using the default currency.
@@ -17,6 +18,7 @@ public class BankNote extends AbstractValuable {
 	 */
 	public BankNote(double value) {
 		super(value);
+		currency = "Baht";
 		this.serialNumber = BankNote.nextSerialNumber;
 		BankNote.nextSerialNumber++;
 	}

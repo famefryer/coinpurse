@@ -1,8 +1,11 @@
 package coinpurse;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import javax.net.ssl.ExtendedSSLSession;
 
 /**
  * Some Coin utility methods for practice using Lists and Comparator.
@@ -20,14 +23,20 @@ public class CoinUtil {
 	 * @return a new List containing only the elements from coinlist that have
 	 *         the requested currency.
 	 */
-	public static List<Valuable> filterByCurrency(final List<Valuable> coinlist, String currency) {
-		List<Valuable> tempFil = new ArrayList<>();
-		for (Valuable valuable : coinlist) {
-			if (valuable.getCurrency().equals(currency)) {
-				tempFil.add(valuable);
-			}
+	public static <E extends Valuable> List<E> filterByCurrency(final List<E> coinlist, String currency) {
+//		List<E> tempFil = new ArrayList<>();
+//		for (E valuable : coinlist) {
+//			if (valuable.getCurrency().equals(currency)) {
+//				tempFil.add(valuable);
+//			}
+//		}
+//		return tempFil;
+		if(currency!=null){
+			Predicate<E> filCur = (s)->((s.getCurrency()).equalsIgnoreCase(currency));
+			List<E> temp = coinlist.stream().filter(filCur).collect(Collectors.toList());
+			return temp;
 		}
-		return tempFil;
+		return null;
 		// return a list of coin references copied from coinlist
 	}
 
@@ -39,7 +48,7 @@ public class CoinUtil {
 	 *            is a List of Coin objects we want to sort.
 	 *
 	 */
-	public static void sortByCurrency(List<Valuable> valuable) {
+	public static void sortByCurrency(List<? extends Valuable> valuable) {
 		ForCompareCurren comp = new ForCompareCurren();
 		Collections.sort(valuable, comp);
 	}
@@ -99,6 +108,7 @@ public class CoinUtil {
 		System.out.print("coins= ");
 		printList(valuable, " ");
 		sumByCurrency(valuable);
+
 	}
 
 	/** Make a list of coins containing different currencies. */
@@ -130,8 +140,18 @@ public class CoinUtil {
 
 		}
 		System.out.println(); // end the line
+
 	}
 
+	public static <E extends Comparable<? super E>> E max(E ... a) {
+		E ans = a[0];
+		for(int x =0;x<a.length;x++){
+			if(ans.compareTo(a[x])<0){
+				ans = a[x];
+			}
+		}
+		return ans;
+	}
 }
 
 /**
